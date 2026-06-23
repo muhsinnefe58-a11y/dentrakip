@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/comments",
+      "dest": "/api/comments/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/comments/(.*)",
+      "dest": "/api/comments/[jobId].js",
+      "methods": ["GET"]
+    }
+  ],
+  "env": {
+    "BROWSERLESS_TOKEN": "@browserless-token",
+    "API_KEY": "@api-key"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "facebook-scraper-node",
+  "version": "1.0.0",
+  "description": "Scrape Facebook public pages, groups, and post comments using Puppeteer and browserless.io",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "node api/server.js",
+    "test": "node example.js"
+  },
+  "keywords": [
+    "facebook",
+    "scraper",
+    "comments",
+    "puppeteer",
+    "browserless",
+    "vercel"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/functions": "^2.0.0",
+    "dotenv": "^16.0.0",
+    "puppeteer-core": "^20.0.0"
+  }
+}
