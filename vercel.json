@@ -16,6 +16,10 @@
       "src": "/api/comments/(.*)",
       "dest": "/api/comments/[jobId].js",
       "methods": ["GET"]
+    },
+    {
+      "src": "/(health|api|)",
+      "dest": "/api/index.js"
     }
   ]
 }
