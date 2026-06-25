@@ -12,7 +12,11 @@
       "dest": "/api/comments/index.js",
       "methods": ["POST"]
     },
-
+    {
+      "src": "/api/comments/(.*)",
+      "dest": "/api/comments/index.js?jobId=$1",
+      "methods": ["GET"]
+    },
     {
       "src": "/(health|api|)",
       "dest": "/api/index.js"

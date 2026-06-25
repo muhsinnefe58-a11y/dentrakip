@@ -62,12 +62,12 @@ async function main() {
     if (url.pathname.startsWith('/api/comments/') && method === 'GET') {
       const jobId = url.pathname.replace('/api/comments/', '');
       req.query = { jobId };
+      req.body = {};
       const mockRes = {
         status(code) { this.statusCode = code; return this; },
         json(data) { send(res, this.statusCode || 200, data); },
       };
-      const pollHandler = (await import('./comments/[jobId].js')).default;
-      await pollHandler(req, mockRes);
+      await handler(req, mockRes);
       return;
     }
 
