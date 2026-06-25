@@ -222,6 +222,35 @@ const posts = await getPosts('nintendo', {
 
 ---
 
+## Çerez Dönüştürme Aracı (CLI)
+
+Netscape formatındaki `cookies.txt` dosyasını JSON array veya cookie string'e dönüştürmek için:
+
+```bash
+# JSON array çıktısı
+node cookies-to-json.js cookies.txt
+
+# Cookie string çıktısı (name=value; name=value)
+node cookies-to-json.js cookies.txt --string
+
+# npm script ile
+npm run cookies -- cookies.txt
+```
+
+**JSON array çıktısı:**
+```json
+[
+  { "name": "datr", "value": "abc123...", "domain": ".facebook.com" }
+]
+```
+
+**String çıktısı:**
+```
+datr=abc123; c_user=100000...
+```
+
+---
+
 ## Kendi Puppeteer Instance'ınızı Kullanmak
 
 Birden fazla fonksiyon çağrısında tarayıcıyı paylaşmak isterseniz `browser` seçeneğini geçebilirsiniz:
@@ -364,6 +393,7 @@ facebook-scraper-node/
 │   ├── scraper.js           # Puppeteer tabanlı çekirdek kazıma motoru
 │   └── vercel-job-store.js  # Vercel için geçici iş deposu (RAM)
 ├── index.js                 # Kütüphane giriş noktası
+├── cookies-to-json.js       # Çerez dönüştürme CLI aracı
 ├── example.js               # Kullanım örneği
 ├── vercel.json              # Vercel dağıtım yapılandırması
 ├── package.json

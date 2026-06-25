@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node api/server.js",
     "dev": "node api/server.js",
-    "test": "node example.js"
+    "test": "node example.js",
+    "cookies": "node cookies-to-json.js"
   },
   "keywords": [
     "facebook",
