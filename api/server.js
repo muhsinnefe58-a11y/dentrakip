@@ -30,13 +30,16 @@ function auth(req, res) {
 }
 
 async function main() {
-  let handler, jobStore;
+  let handler, profileHandler, jobStore;
 
   if (process.env.VERCEL) {
     handler = (await import('./comments/index.js')).default;
+    profileHandler = (await import('./profile/index.js')).default;
   } else {
     const { default: h } = await import('./comments/index.js');
     handler = h;
+    const { default: p } = await import('./profile/index.js');
+    profileHandler = p;
     jobStore = (await import('../lib/vercel-job-store.js')).jobStore;
   }
 
@@ -71,6 +74,28 @@ async function main() {
       return;
     }
 
+    if (url.pathname === '/api/profile' && method === 'POST') {
+      req.body = await parseBody(req);
+      const mockRes = {
+        status(code) { this.statusCode = code; return this; },
+        json(data) { send(res, this.statusCode || 200, data); },
+      };
+      await profileHandler(req, mockRes);
+      return;
+    }
+
+    if (url.pathname.startsWith('/api/profile/') && method === 'GET') {
+      const jobId = url.pathname.replace('/api/profile/', '');
+      req.query = { jobId };
+      req.body = {};
+      const mockRes = {
+        status(code) { this.statusCode = code; return this; },
+        json(data) { send(res, this.statusCode || 200, data); },
+      };
+      await profileHandler(req, mockRes);
+      return;
+    }
+
     send(res, 404, { error: 'Not found' });
   });
 
@@ -79,6 +104,8 @@ async function main() {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`POST /api/comments — submit scrape job`);
     console.log(`GET  /api/comments/:jobId — poll results`);
+    console.log(`POST /api/profile — submit profile scrape job`);
+    console.log(`GET  /api/profile/:jobId — poll results`);
     console.log(`GET  /health — health check`);
   });
 }

@@ -18,6 +18,16 @@
       "methods": ["GET"]
     },
     {
+      "src": "/api/profile",
+      "dest": "/api/profile/index.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/profile/(.*)",
+      "dest": "/api/profile/index.js?jobId=$1",
+      "methods": ["GET"]
+    },
+    {
       "src": "/(health|api|)",
       "dest": "/api/index.js"
     }

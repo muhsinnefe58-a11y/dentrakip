@@ -16,6 +16,8 @@ export default async function handler(req, res) {
     endpoints: {
       'POST /api/comments': 'Submit a comment scraping job',
       'GET /api/comments/:jobId': 'Poll job results',
+      'POST /api/profile': 'Submit a profile scrape job',
+      'GET /api/profile/:jobId': 'Poll job results',
       'GET /health': 'Health check',
     },
   });
