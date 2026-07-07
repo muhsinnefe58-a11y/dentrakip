@@ -1,26 +1,16 @@
 {
-  "name": "facebook-scraper-node",
+  "name": "dentrakip",
   "version": "1.0.0",
-  "description": "Scrape Facebook public pages, groups, and post comments using Puppeteer and browserless.io",
-  "main": "index.js",
+  "description": "Facebook yorum takip paneli",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node api/server.js",
-    "dev": "node api/server.js",
-    "test": "node example.js",
-    "cookies": "node cookies-to-json.js"
+    "start": "node server.js"
   },
-  "keywords": [
-    "facebook",
-    "scraper",
-    "comments",
-    "puppeteer",
-    "browserless",
-    "vercel"
-  ],
-  "author": "",
+  "keywords": ["facebook","scraper","puppeteer","browserless"],
   "license": "MIT",
   "dependencies": {
+    "express": "^4.21.0",
     "@upstash/redis": "^1.38.0",
     "@vercel/functions": "^2.0.0",
     "dotenv": "^16.0.0",
