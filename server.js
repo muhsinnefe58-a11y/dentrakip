@@ -10,17 +10,27 @@ app.use(express.json());
 
 app.post('/api/comments', async (req, res) => {
   try {
-    const { postUrl } = req.body;
+    const { postUrl, cookies } = req.body;
     if (!postUrl) return res.status(400).json({ error: 'Post URL gerekli' });
 
     const token = process.env.BROWSERLESS_TOKEN;
     if (!token) return res.status(500).json({ error: 'BROWSERLESS_TOKEN ayarlanmamış' });
 
-    const data = await getPostComments(postUrl, {
+    const options = {
       browserlessToken: token,
       maxComments: 100,
-      debug: false
-    });
+      debug: process.env.DEBUG === 'true'
+    };
+
+    if (cookies) {
+      options.cookies = cookies;
+      console.log('Panelden gönderilen cookies kullanılıyor');
+    } else if (process.env.FACEBOOK_COOKIES) {
+      options.cookies = process.env.FACEBOOK_COOKIES;
+      console.log('FACEBOOK_COOKIES env kullanılıyor');
+    }
+
+    const data = await getPostComments(postUrl, options);
 
     const comments = (data || []).map(c => ({
       id: c.legacy_fbid || c.id || '',

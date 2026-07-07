@@ -55,11 +55,13 @@ async function fetchComments() {
   showLoading(true);
   showStatus('', '');
 
+  const cookies = document.getElementById('cookieInput').value.trim();
+
   try {
     const res = await fetch('/api/comments', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ postUrl, sortBy })
+      body: JSON.stringify({ postUrl, sortBy, cookies: cookies || undefined })
     });
 
     const ct = res.headers.get('content-type') || '';
