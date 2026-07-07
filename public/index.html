@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dentrakip - Facebook Yorum Takip</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Dentrakip</h1>
+    <span class="subtitle">Facebook Yorum Takip Paneli</span>
+  </header>
+
+  <main class="container">
+    <aside class="sidebar">
+      <div class="card">
+        <h2>Gönderi Bilgileri</h2>
+        <div class="form-group">
+          <label for="postUrl">Facebook Gönderi URL'si</label>
+          <input type="url" id="postUrl" placeholder="https://www.facebook.com/.../posts/...">
+        </div>
+        <div class="form-group">
+          <label for="sortBy">Sıralama</label>
+          <select id="sortBy">
+            <option value="newest">En Yeni</option>
+            <option value="oldest">En Eski</option>
+          </select>
+        </div>
+        <button id="fetchBtn" class="btn-primary" onclick="fetchComments()">
+          Yorumları Getir
+        </button>
+        <div class="info-box">
+          <strong>Kullanım:</strong>
+          <ul>
+            <li>Gönderi URL'sini yapıştır</li>
+            <li>"Yorumları Getir" ile çek (10-30sn sürebilir)</li>
+            <li><strong>Gönderiyi Aç</strong> → Facebook'ta açar</li>
+            <li><strong>Profili Aç & Mesaj Gönder</strong> → kullanıcı profiline gider</li>
+          </ul>
+        </div>
+        <div id="status" class="status"></div>
+      </div>
+    </aside>
+
+    <section class="main-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>Yorumlar</h2>
+          <span id="commentCount" class="badge">0</span>
+        </div>
+        <div id="commentsList" class="comments-list">
+          <div class="empty-state">
+            <p>Henüz yorum yüklenmedi.</p>
+            <p>Soldaki alana gönderi URL'si girip "Yorumları Getir" butonuna tıklayın.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="loadingOverlay" class="loading-overlay" style="display:none;">
+    <div class="spinner"></div>
+    <p>Yorumlar çekiliyor, bu 10-30 saniye sürebilir...</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
