@@ -1,7 +1,2 @@
+node_modules/
 .env
-node_modules
-cookies.txt
-.vercel
-.env*.local
-deneme.js
-debug_*.html
