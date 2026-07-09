@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { getPostComments } from './index.js';
 import path from 'path';
